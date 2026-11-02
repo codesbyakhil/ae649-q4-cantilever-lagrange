@@ -1,0 +1,31 @@
+V6  reactions R = -C^T lambda on the clamp; statics and Clapeyron on every mesh (P = -10 N)
+    expected: sum Rx = 0, sum Ry = -P = 10.0 N, reaction moment about (0, 0) = -P L = 20.0 N m
+
+mesh     | sum Rx (N) | sum Ry (N)       | moment of R (N m) | net moment R + f (N m) | (d.K.d - f.d) / f.d | max|K d - f + C^T lambda| / max|K d|
+------------------------------------------------------------------------------------------------------------------------------------------
+  3x1    |  1.1e-12   | 9.999999999979  | 19.999999999970   | -3.0e-11               |  1.6e-13             | 2.7e-14
+  6x2    | -4.5e-13   | 9.999999999902  | 19.999999999870   | -1.3e-10               | -2.4e-12             | 1.9e-13
+ 12x4    | -2.3e-11   | 9.999999999496  | 19.999999999379   | -6.2e-10               |  3.1e-11             | 1.4e-12
+ 24x8    | -5.9e-11   | 9.999999998753  | 19.999999998507   | -1.5e-09               |  3.8e-11             | 2.8e-12
+ 48x16   |  9.2e-12   | 9.999999998828  | 19.999999999391   | -6.1e-10               |  2.2e-11             | 5.4e-12
+ 96x32   |  6.2e-10   | 9.999999991255  | 19.999999988544   | -1.1e-08               |  2.7e-11             | 1.3e-11
+192x64   |  2.2e-10   | 10.000000007987  | 20.000000008089   |  8.1e-09               | -7.3e-10             | 3.3e-11
+384x128  |  1.1e-09   | 9.999999980917  | 19.999999961142   | -3.9e-08               |  1.4e-09             | 8.6e-11
+
+All exact up to round-off: element stiffnesses annihilate rigid-body motions, so the
+nodal forces K d are self-equilibrated, and with C d = 0 the reactions do no work.
+The last column is the residual of the first block row, K d + C^T lambda = f, relative to
+the largest nodal force, so R = K d - f = -C^T lambda holds to round-off.
+
+Distribution along the clamp (R / tributary area t h, t h/2 at the corners):
+  x (bending), 96 x 32, interior nodes: max |t_x(FE) - PLy/I| / max|PLy/I| = 0.054
+  corner nodes, t(FE) / beam value at the corner, and the corner traction itself:
+  mesh     | t_x / (PLy/I) | t_x corner (kPa) | t_y corner (kPa) | Ry corner node (N)
+   24x8    |         1.211 |             64.6 |             35.7 | 33.4457
+   96x32   |         1.536 |             81.9 |             51.1 | 11.9669
+  384x128  |         2.130 |            113.6 |             67.9 | 3.9806
+  The corner tractions keep growing as the mesh is refined: the clamped corners are
+  singular points of the 2D elasticity solution (the clamp also stops the Poisson
+  contraction there). In y the corners carry a large share of the shear force, so the
+  parabolic beam shear does not describe the traction AT a fully clamped 2D edge; beam
+  theory only fixes the resultants there (Saint-Venant), and those are exact above.

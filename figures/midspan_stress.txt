@@ -1,0 +1,16 @@
+V6  bending stress in the mid-span element column vs sigma_xx = -P (L - x) y / I
+    beam-theory surface stress at x = L/2: +-26.6667 kPa
+
+mesh     | column x-range (m) | max error / local peak | reduction | independent | max error / peak at L/2
+------------------------------------------------------------------------------------------------------------
+  3x1    | 0.6667 - 1.3333    |                 0.5162 |         - |        0.52 | 0.6155
+  6x2    | 0.6667 - 1.0000    |                 0.5308 |      0.97 |        0.53 | 0.6703
+ 12x4    | 0.8333 - 1.0000    |                 0.3091 |      1.72 |        0.31 | 0.3497
+ 24x8    | 0.9167 - 1.0000    |                 0.1163 |      2.66 |        0.12 | 0.1239
+ 48x16   | 0.9583 - 1.0000    |                 0.0410 |      2.84 |       0.041 | 0.0423
+ 96x32   | 0.9792 - 1.0000    |                 0.0150 |      2.73 |       0.015 | 0.0152
+192x64   | 0.9896 - 1.0000    |                 0.0059 |      2.54 |      0.0059 | 0.0060
+384x128  | 0.9948 - 1.0000    |                 0.0025 |      2.33 |           - | 0.0025
+
+reduction = error on the previous mesh / error on this mesh.
+The error falls on every refinement from 6 x 2 on (it does not fall from 3 x 1 to 6 x 2: both are dominated by locking).

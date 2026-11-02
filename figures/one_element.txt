@@ -1,0 +1,19 @@
+V5  one-element cantilever (1 x 1 mesh), clamped by Lagrange multipliers, P/2 at each end node
+
+quantity              | code              | hand solution     | relative difference
+----------------------------------------------------------------------------------
+v at (L, -D/2) (m)    | -6.8510837727e-08 | -6.8510837727e-08 | 6.3e-14
+v at (L, +D/2) (m)    | -6.8510837727e-08 | -6.8510837727e-08 | 6.3e-14
+u at (L, +D/2) (m)    |  3.8383128295e-09 |  3.8383128295e-09 | 5.6e-14
+u at (L, -D/2) (m)    | -3.8383128295e-09 | -3.8383128295e-09 | 7.0e-14
+Rx at (0, -D/2) (N)   |  1.3333333333e+02 |  1.3333333333e+02 | 6.4e-14
+Ry at (0, -D/2) (N)   |  5.0000000000e+00 |  5.0000000000e+00 | 1.0e-13
+Rx at (0, +D/2) (N)   | -1.3333333333e+02 | -1.3333333333e+02 | 6.3e-14
+Ry at (0, +D/2) (N)   |  5.0000000000e+00 |  5.0000000000e+00 | 1.5e-13
+
+Multipliers (one per clamped DOF, rows of C in the order u0, v0, u1, v1):
+  lambda      = -133.333333  -5.000000   133.333333  -5.000000  N
+  -R(clamped) = -133.333333  -5.000000   133.333333  -5.000000  N
+
+v_tip / Euler-Bernoulli = 0.01445  (one element captures 1.4% of the deflection:
+Q4 shear locking, a/b = 13.3; compare Cook Eq. 3.6-11 in studies/bending_error.py)

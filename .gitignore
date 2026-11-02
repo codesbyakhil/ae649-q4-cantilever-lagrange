@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# PDFs: only the slides are tracked
+*.pdf
+!slides/presentation.pdf
+
+# LaTeX build files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+
+# Logo (institute trademark, not redistributed; see README)
+slides/iitb_logo.png
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

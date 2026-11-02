@@ -1,0 +1,12 @@
+V1  1D bar: EA u'' + q = 0, u(0) = 0, u(L) = U, solved with Lagrange multipliers
+    L = 1.0 m, EA = 2.000e+07 N, q = 1000.0 N/m, U = 1.0e-05 m
+
+elements | max |d - u_exact| / max|u| | -lambda_1 (N)  exact -N(0) | -lambda_2 (N)  exact N(L)
+------------------------------------------------------------------------------------------------
+       2 |                    1.5e-16 |   -700.000000  -700.000000 |   -300.000000 -300.000000
+       3 |                    0.0e+00 |   -700.000000  -700.000000 |   -300.000000 -300.000000
+       8 |                    1.4e-16 |   -700.000000  -700.000000 |   -300.000000 -300.000000
+      32 |                    4.8e-15 |   -700.000000  -700.000000 |   -300.000000 -300.000000
+
+Nodal values exact to round-off (linear elements, constant EA, consistent loads:
+Cook p. 47); -lambda equals the support forces from N = EA u'.

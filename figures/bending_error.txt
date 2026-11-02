@@ -1,0 +1,23 @@
+V4  Q4 in pure bending: theta_FE / theta_exact vs Cook Eq. 3.6-11 (nu = 0.3)
+    a, b = element half-length and half-depth; one element (length 2a, depth D) or an
+    nx x 1 strip of the L = 2 m cantilever (a = L/(2 nx), b = D/2), clamped by Lagrange multipliers
+
+model          |    a/b  | FE ratio      | Cook Eq. 3.6-11 | FE - Cook
+--------------------------------------------------------------------------
+one element    |  0.5000 | 0.8367816092 | 0.8367816092    | -1.1e-16
+one element    |  1.0000 | 0.6740740741 | 0.6740740741    | -1.1e-16
+one element    |  2.0000 | 0.3791666667 | 0.3791666667    | -3.9e-16
+one element    |  3.0000 | 0.2192771084 | 0.2192771084    | -2.5e-16
+one element    |  4.4444 | 0.1149921997 | 0.1149921997    | -1.1e-15
+one element    |  6.0000 | 0.0669117647 | 0.0669117647    |  6.7e-16
+ 1 x 1 strip   | 13.3333 | 0.0143936731 | 0.0143936731    |  6.7e-16
+ 2 x 1 strip   |  6.6667 | 0.0549664430 | 0.0549664430    |  1.2e-14
+ 3 x 1 strip   |  4.4444 | 0.1149921997 | 0.1149921997    | -9.0e-14
+ 6 x 1 strip   |  2.2222 | 0.3335294118 | 0.3335294118    |  8.0e-14
+12 x 1 strip   |  1.1111 | 0.6354310345 | 0.6354310345    | -4.6e-13
+24 x 1 strip   |  0.5556 | 0.8212813370 | 0.8212813370    |  8.6e-13
+
+Every element of a strip carries the same moment, so the strip behaves exactly like one
+element: the ratio depends only on a/b. In pure bending the 3 x 1 strip (a/b = 4.44)
+rotates only 11.5% as much as the exact solution (parasitic-shear locking), which is why
+the coarse meshes of the cantilever are so stiff (studies/tip_deflection.py).

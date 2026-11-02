@@ -1,0 +1,31 @@
+V6  tip deflection v(L, 0) of the clamped cantilever (P = -10 N), nested meshes
+    Euler-Bernoulli PL^3/3EI = -4.74074 um, Timoshenko (kappa = 5/6) = -4.76154 um
+
+mesh     |   DOF | v_tip (um) | / Euler-B. | / Timosh. | compliance f.d (J) | independent (um) | difference
+-----------------------------------------------------------------------------------------------------------------
+  3x1    |    16 |   -0.54734 |     0.1155 |    0.1149 |       5.473385e-06 |         -0.54734 |  1.5e-06
+  6x2    |    42 |   -1.62173 |     0.3421 |    0.3406 |       1.621752e-05 |         -1.62173 |  3.2e-06
+ 12x4    |   130 |   -3.19979 |     0.6750 |    0.6720 |       3.199821e-05 |         -3.19979 | -1.2e-06
+ 24x8    |   450 |   -4.23595 |     0.8935 |    0.8896 |       4.235997e-05 |         -4.23595 | -2.1e-06
+ 48x16   |  1666 |   -4.61223 |     0.9729 |    0.9686 |       4.612299e-05 |         -4.61223 | -2.1e-07
+ 96x32   |  6402 |   -4.71813 |     0.9952 |    0.9909 |       4.718223e-05 |         -4.71813 | -3.2e-06
+192x64   | 25090 |   -4.74577 |     1.0011 |    0.9967 |       4.745870e-05 |         -4.74577 | -1.2e-06
+384x128  | 99330 |   -4.75287 |     1.0026 |    0.9982 |       4.752972e-05 |                - | -
+
+Compliance f.d increases on every refinement: True (minimum potential energy,
+nested spaces). The independent column agrees to the 5 printed digits.
+
+meshes (h, h/2, h/4)        | observed order q | Richardson, q observed (um) | Richardson, q = 2 (um)
+----------------------------------------------------------------------------------------------------
+3x1 -> 6x2 -> 12x4           |           -0.555 |                     1.74443 | -3.72581
+6x2 -> 12x4 -> 24x8          |            0.607 |                    -6.21717 | -4.58134
+12x4 -> 24x8 -> 48x16        |            1.461 |                    -4.82679 | -4.73766
+24x8 -> 48x16 -> 96x32       |            1.829 |                    -4.75961 | -4.75343
+48x16 -> 96x32 -> 192x64     |            1.938 |                    -4.75553 | -4.75498
+96x32 -> 192x64 -> 384x128   |            1.961 |                    -4.75532 | -4.75524
+
+Extrapolated tip deflection (finest triple, q = 1.961): -4.75532 um
+  = 0.99869 x Timoshenko (-0.13%), 1.00308 x Euler-Bernoulli (+0.31%)
+  change from the previous triple's estimate: 0.00021 um (0.004%)
+The observed order rises towards 2, the rate expected for bilinear elements (error O(h^2)).
+Coarse meshes are far from it: parasitic-shear locking dominates there (studies/bending_error.py).
